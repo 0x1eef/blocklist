@@ -5,7 +5,7 @@
 #include <sys/param.h>
 #include <fetch.h>
 #include <stdlib.h>
-#include <blocklist.pf/buffer.h>
+#include <blocklist.pf/dyn_array.h>
 #include <blocklist.pf/file.h>
 #include <blocklist.pf/blocklist.h>
-buffer* fetch_blocklist(blocklist *bl, int maxrows, int maxcols);
+dyn_array* fetch_blocklist(blocklist *bl, int maxcols);

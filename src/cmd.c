@@ -1,55 +1,50 @@
 #include <blocklist.pf/fetch.h>
 #include <blocklist.pf/file.h>
-#include <blocklist.pf/buffer.h>
 #include <blocklist.pf/cmd.h>
 #include <blocklist.pf/set.h>
-#include <search.h>
 #include <blocklist.pf/dyn_array.h>
 #include <blocklist.pf/hash.h>
 
+#define MAXCOLS 200
+
 void
 fetch_cmd(void) {
-  int size;
-  buffer *buf;
-  size = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
-  for (int i = 0; i < size; i++) {
+  dyn_array *ary;
+  for (int i = 0; i < (int)(sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0])); i++) {
     blocklist bl = BLOCKLISTS[i];
     printf("Fetch: %s\n", bl.url);
-    buf = fetch_blocklist(&bl, MAXROWS, MAXCOLS);
-    if (buf == NULL) {
+    ary = fetch_blocklist(&bl, MAXCOLS);
+    if (ary == NULL) {
       fprintf(stderr, "Network error: %s\n", fetchLastErrString);
       continue;
     }
-    write_file(bl.path, buf);
+    write_file(bl.path, ary);
     printf("Write: %s\n", bl.path);
-    free_buffer(buf);
   }
 }
 
 void
 cat_cmd(void) {
-  int size;
   char *str;
-  buffer *buf;
   htable *table;
-  struct Set set = RB_INITIALIZER(&set);
+  dyn_array *blocklists, *file;
   hitem item, *fitem;
+  struct Set set = RB_INITIALIZER(&set);
+
   table = group_blocklists_by_category(BLOCKLISTS);
-  size = sizeof(TABLES) / sizeof(TABLES[0]);
-  for (int i = 0; i < size; i++) {
-    const char *tablen = TABLES[i];
-    item.key = (char *)tablen;
+  for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++) {
+    item.key = (char *)TABLES[i];
     hsearch_r(item, FIND, &fitem, table);
-    printf("table <%s> {\n", tablen);
-    dyn_array *arr = fitem->data;
-    for (int j = 0; j < arr->size; j++) {
-      blocklist *bl = arr->items[j];
+    printf("table <%s> {\n", fitem->key);
+    blocklists = fitem->data;
+    for (int j = 0; j < blocklists->size; j++) {
+      blocklist *bl;
+      bl = blocklists->items[j];
       printf("##\n# %s\n# %s\n# %s\n", bl->name, bl->desc, bl->url);
-      buf = read_file(bl->path, MAXROWS, MAXCOLS);
-      buf = filter_buffer(buf, &set);
-      str = format_buffer(buf, 3);
+      file = read_file(bl->path, MAXCOLS);
+      file = filter_file(file, &set);
+      str = format_file(file, 3, MAXCOLS);
       printf("%s", str);
-      free_buffer(buf);
       free(str);
     }
     printf("}\n");

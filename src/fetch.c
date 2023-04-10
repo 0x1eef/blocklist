@@ -1,16 +1,16 @@
 #include <blocklist.pf/fetch.h>
 
-buffer*
-fetch_blocklist(blocklist *bl, int maxrows, int maxcols) {
+dyn_array*
+fetch_blocklist(blocklist *bl, int maxcols) {
   struct url *u;
   FILE *f;
-  buffer *buf;
+  dyn_array *ary;
   u = fetchParseURL(bl->url);
   f = fetchGetHTTP(u, "");
   if (f == NULL) {
     return NULL;
   }
-  buf = new_buffer(f, maxrows, maxcols);
+  ary = array_from_file(f, maxcols);
   fclose(f);
-  return buf;
+  return ary;
 }
