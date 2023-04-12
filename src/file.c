@@ -10,26 +10,29 @@
 #include <ctype.h>
 
 static int is_space(char *str);
+static int blksize_sum(dyn_array *file);
 
 char*
 format_file(dyn_array *file, int per_line) {
-  char *str;
-  size_t buf;
-  buf = 0;
-  str = safe_malloc(sizeof(char[1]));
-  strcpy(str, "\0");
+  char *str, *ptr;
+  int len;
+  str = safe_malloc(sizeof(char[blksize_sum(file) + 1]));
+  ptr = str;
+  len = 0;
   for (int i = 1; i <= file->size; i++) {
-    char *lne;
-    lne = file->items[i - 1];
-    buf = buf + sizeof(char[strlen(lne)]) + sizeof(char[4]);
-    str = safe_realloc(str, buf);
-    strcat(str, strdup(chomp(lne)));
+    char *line;
+    line = chomp(file->items[i - 1]);
+    len += strlen(line);
+    ptr = mempcpy(ptr, line, strlen(line));
     if (i % per_line == 0 || i == file->size) {
-      strcat(str, " \\\n");
+      ptr = mempcpy(ptr, " \\\n", 3);
+      len += 3;
     } else {
-      strcat(str, ", ");
+      ptr = mempcpy(ptr, ", ", 2);
+      len += 2;
     }
   }
+  str[len] = '\0';
   return str;
 }
 
@@ -87,6 +90,16 @@ write_file(const char *path, dyn_array *ary) {
   }
   fclose(f);
   return t;
+}
+
+static int
+blksize_sum(dyn_array *file) {
+  int len;
+  len = 0;
+  for (int i = 0; i < file->size; i++) {
+    len += strlen(chomp(file->items[i])) + 3;
+  }
+  return len;
 }
 
 static int

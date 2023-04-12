@@ -21,6 +21,9 @@ build: $(BIN_FILE)
 clean:
 	rm -rf $(BIN_DIR)
 
+cat: build
+	$(BIN_FILE) cat
+
 $(BIN_FILE):
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $(SRC_FILES) -I$(INC_DIR) -o $@ $^

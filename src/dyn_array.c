@@ -7,7 +7,8 @@ static char* read_line(FILE *f, int blocks);
 
 dyn_array*
 array_init(void) {
-  dyn_array *ary = safe_malloc(sizeof(dyn_array));
+  dyn_array *ary;
+  ary = safe_malloc(sizeof(dyn_array));
   ary->size = 0;
   ary->items = safe_malloc(0);
   return ary;
@@ -18,7 +19,11 @@ array_from_file(FILE *f) {
   dyn_array *ary;
   ary = array_init();
   while(!feof(f)) {
-    array_push(ary, read_line(f, 16));
+    char *line;
+    line = read_line(f, 16);
+    if (line) {
+      array_push(ary, line);
+    }
   }
   return ary;
 }
@@ -48,22 +53,29 @@ array_free_item(dyn_array *arr, int index) {
 }
 
 char*
-read_line(FILE *f, int blocks) {
+read_line(FILE *f, int blksize) {
   int i, buf;
-  char c, *str;
-  str = safe_malloc(sizeof(char[blocks]));
-  buf = blocks;
+  char c, *str, *ptr;
   i = 0;
-  while((c = (char)fgetc(f)) != '\n') {
-    str[i++] = c;
-    if (feof(f)) {
-      break;
-    } else if (i+1 == blocks) {
-      buf += blocks;
-      str = safe_realloc(str, sizeof(char[buf]));
+  buf = blksize;
+  ptr = str = safe_malloc(sizeof(char[blksize]));
+  while((c = fgetc(f)) != EOF) {
+    ptr = mempcpy(ptr, &c, sizeof(char));
+    if (i+1 == buf-1) {
+      ptr = str = safe_realloc(str, sizeof(char[buf + blksize]));
+      ptr += i;
+      buf += blksize;
     }
+    if (c == '\n') {
+      break;
+    }
+    i++;
   }
-  str[i++] = '\n';
-  str[i] = '\0';
-  return str;
+  if (i == 0) {
+    free(str);
+    return NULL;
+  } else {
+    memcpy(ptr, "\0", sizeof(char));
+    return str;
+  }
 }
