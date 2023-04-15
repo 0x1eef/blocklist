@@ -8,7 +8,7 @@ typedef struct {
   const char *desc;
   const char *table;
   const char *url;
-  const char *path;
+  const char *filename;
   const char *format;
 } blocklist;
 

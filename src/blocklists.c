@@ -14,7 +14,7 @@ blocklist BLOCKLISTS[] = {
     .name = "blocklist.de",
     .desc = "A list of IP addresses recommended for block by blocklist.de",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/blocklist.txt",
+    .filename = "attacks_blocklist.de.txt",
     .url = "https://lists.blocklist.de/lists/all.txt",
     .format = "ipset"
   },
@@ -22,7 +22,7 @@ blocklist BLOCKLISTS[] = {
     .name = "emergingthreats.net",
     .desc = "A list of IP addresses recommended for block by Emerging Threats",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/emergingthreats_compromised_ips.txt",
+    .filename = "attacks_etcompromised.txt",
     .url = "https://iplists.firehol.org/files/et_compromised.ipset",
     .format = "ipset"
   },
@@ -30,7 +30,7 @@ blocklist BLOCKLISTS[] = {
     .name = "emergingthreats.net",
     .desc = "A list of IP addresses recommended for block by Emerging Threats",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/emergingthreats_block_ips.txt",
+    .filename = "attacks_etblock.txt",
     .url = "https://iplists.firehol.org/files/et_block.netset",
     .format = "ipset"
   },
@@ -38,7 +38,7 @@ blocklist BLOCKLISTS[] = {
     .name = "firehol (level 1)",
     .desc = "A list of IP addresses recommended for block by firehol",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/firehol_level1.txt",
+    .filename = "attacks_firehol1.txt",
     .url = "https://iplists.firehol.org/files/firehol_level1.netset",
     .format = "ipset"
   },
@@ -46,7 +46,7 @@ blocklist BLOCKLISTS[] = {
     .name = "firehol (level 2)",
     .desc = "A list of IP addresses recommended for block by firehol",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/firehol_level2.txt",
+    .filename = "attacks_firehol2.txt",
     .url = "https://iplists.firehol.org/files/firehol_level2.netset",
     .format = "ipset"
   },
@@ -54,7 +54,7 @@ blocklist BLOCKLISTS[] = {
     .name = "firehol (webserver)",
     .desc = "A list of IP addresses recommended for block by firehol",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/firehol_webserver.txt",
+    .filename = "attacks_fireholwebserver.txt",
     .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
     .format = "ipset"
   },
@@ -62,7 +62,7 @@ blocklist BLOCKLISTS[] = {
     .name = "blocklist.net.ua",
     .desc = "A list of IP addresses recommended for block by blocklist.net.ua",
     .table = "attacks",
-    .path = "/usr/local/share/pf/blocklists/blocklist.net.ua.txt",
+    .filename = "attacks_blocklist.net.ua.txt",
     .url = "https://iplists.firehol.org/files/blocklist_net_ua.ipset",
     .format = "ipset"
   },
@@ -73,7 +73,7 @@ blocklist BLOCKLISTS[] = {
     .name = "cybercrime",
     .desc = "A list of IP addresses recommended for block by " \
             "cybercrime-tracker.net",
-    .path = "/usr/local/share/pf/blocklists/cybercrime_tracker.txt",
+    .filename = "malware_cybercrimetracker.txt",
     .table = "malware",
     .url = "https://iplists.firehol.org/files/cybercrime.ipset",
     .format = "ipset"
@@ -85,7 +85,7 @@ blocklist BLOCKLISTS[] = {
     .name = "binarydefense.com",
     .desc = "A list of IP addresses recommended for block by Binary Defense",
     .table = "reputation",
-    .path = "/usr/local/share/pf/blocklists/binarydefense_banlist.txt",
+    .filename = "reputation_binarydefensebanlist.txt",
     .url = "https://www.binarydefense.com/banlist.txt",
     .format = "ipset"
   },
@@ -95,7 +95,7 @@ blocklist BLOCKLISTS[] = {
   [9] = {
     .name = "Tor network nodes",
     .desc = "A list of Tor network nodes provided by emergingthreats.net",
-    .path = "/usr/local/share/pf/blocklists/tor_network_nodes.txt",
+    .filename = "anonymizers_tornetworknodes.txt",
     .table = "anonymizers",
     .url = "https://iplists.firehol.org/files/et_tor.ipset",
     .format = "ipset"
@@ -106,7 +106,7 @@ blocklist BLOCKLISTS[] = {
   [10] = {
     .name = "adservers",
     .desc = "A list of IP addresses associated with adware",
-    .path = "/usr/local/share/pf/blocklists/yoyo_adservers.txt",
+    .filename = "adware_yoyoadservers.txt",
     .table = "adware",
     .url = "https://pgl.yoyo.org/adservers/iplist.php?ipformat=plain&showintro=0&mimetype=plaintext",
     .format = "ipset"
