@@ -114,7 +114,7 @@ blocklist BLOCKLISTS[] = {
 };
 
 htable*
-group_blocklists_by_category(blocklist blocklists[], size_t size) {
+group_blocklists(blocklist blocklists[], size_t size) {
   htable *table;
   dyn_array *ary;
   table = safe_malloc(sizeof(htable));
