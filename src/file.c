@@ -12,18 +12,20 @@
 static int is_space(char *str);
 static int blksize_sum(dyn_array *file);
 
-char*
-format_file(dyn_array *file, int per_line) {
+char *
+format_file(dyn_array *file, int per_line)
+{
   char *str, *ptr;
   int len;
   ptr = str = safe_malloc(sizeof(char[blksize_sum(file) + 1]));
   len = 0;
-  for (int i = 1; i <= file->size; i++) {
+  for (int i = 1; i <= file->size; i++)
+  {
     char *line;
     line = chomp(file->items[i - 1]);
     len += strlen(line);
     ptr = mempcpy(ptr, line, strlen(line));
-    if (i % per_line == 0 || i == file->size) {
+    if ((i % per_line == 0) || (i == file->size)) {
       ptr = mempcpy(ptr, " \\\n", 3);
       len += 3;
     } else {
@@ -32,14 +34,17 @@ format_file(dyn_array *file, int per_line) {
     }
   }
   str[len] = '\0';
-  return str;
+  return (str);
 }
 
-dyn_array*
-filter_file(dyn_array *file, struct Set *set) {
-  for (int i = 0; i < file->size; i++) {
-    if (strncmp(file->items[i], "#", 1) == 0 ||
-        is_space(file->items[i])) {
+
+dyn_array *
+filter_file(dyn_array *file, struct Set *set)
+{
+  for (int i = 0; i < file->size; i++)
+  {
+    if ((strncmp(file->items[i], "#", 1) == 0) ||
+      is_space(file->items[i])) {
       array_free_item(file, i);
       i--;
     } else {
@@ -54,11 +59,13 @@ filter_file(dyn_array *file, struct Set *set) {
       }
     }
   }
-  return file;
+  return (file);
 }
 
-dyn_array*
-read_file(const char *path) {
+
+dyn_array *
+read_file(const char *path)
+{
   FILE *f;
   dyn_array *ary;
   f = fopen(path, "rb");
@@ -68,12 +75,13 @@ read_file(const char *path) {
   }
   ary = array_from_file(f);
   fclose(f);
-  return ary;
+  return (ary);
 }
 
 
 int
-write_file(const char *path, dyn_array *ary) {
+write_file(const char *path, dyn_array *ary)
+{
   int t;
   FILE *f;
   t = 0;
@@ -82,31 +90,38 @@ write_file(const char *path, dyn_array *ary) {
     printf("%s: %s\n", path, strerror(errno));
     exit(errno);
   }
-  for(int i = 0; i < ary->size; i++) {
+  for (int i = 0; i < ary->size; i++)
+  {
     t += write(fileno(f),
-               ary->items[i],
-               strlen(ary->items[i]));
+        ary->items[i],
+        strlen(ary->items[i]));
   }
   fclose(f);
-  return t;
+  return (t);
 }
 
+
 static int
-blksize_sum(dyn_array *file) {
+blksize_sum(dyn_array *file)
+{
   int len;
   len = 0;
-  for (int i = 0; i < file->size; i++) {
+  for (int i = 0; i < file->size; i++)
+  {
     len += strlen(chomp(file->items[i])) + 3;
   }
-  return len;
+  return (len);
 }
 
+
 static int
-is_space(char *str) {
-  for (int i = 0; i < (int)strlen(str); i++) {
+is_space(char *str)
+{
+  for (int i = 0; i < (int)strlen(str); i++)
+  {
     if (!isspace(str[i])) {
-      return 0;
+      return (0);
     }
   }
-  return 1;
+  return (1);
 }

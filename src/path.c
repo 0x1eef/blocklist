@@ -1,47 +1,54 @@
 #include <blocklist.pf/path.h>
 
-static char* join_sep(char *str, char *chr);
+static char * join_sep(char *str, char *chr);
 
-char*
-blocklistpf_dir(void) {
+char *
+blocklistpf_dir(void)
+{
   if (getenv("BLOCKLISTPF_DIR")) {
-    return strdup(getenv("BLOCKLISTPF_DIR"));
-  } else if (getenv("XDG_DATA_HOME")){
-    return join_path(getenv("XDG_DATA_HOME"), "blocklist.pf", NULL);
+    return (strdup(getenv("BLOCKLISTPF_DIR")));
+  } else if (getenv("XDG_DATA_HOME")) {
+    return (join_path(getenv("XDG_DATA_HOME"), "blocklist.pf", NULL));
   } else if (getenv("HOME")) {
-    return join_path(getenv("HOME"), ".local", "share", "blocklist.pf", NULL);
+    return (join_path(getenv("HOME"), ".local", "share", "blocklist.pf", NULL));
   } else {
-    return strdup("/usr/local/share/blocklist.pf");
+    return (strdup("/usr/local/share/blocklist.pf"));
   }
 }
 
-char*
-join_path(char *str, ...) {
+
+char *
+join_path(char *str, ...)
+{
   char *path;
   int c;
   va_list args;
   path = strdup("\0");
   c = 0;
   va_start(args, str);
-  while(str != NULL) {
+  while (str != NULL)
+  {
     char *j;
     j = join_sep(str, "/");
     c += strlen(j);
     path = realloc(path, sizeof(char[c + 2]));
     strncat(path, j, strlen(j));
-    str = va_arg(args, char*);
+    str = va_arg(args, char *);
   }
   va_end(args);
-  return path;
+  return (path);
 }
 
+
 int
-mkdir_p(char *path) {
+mkdir_p(char *path)
+{
   char *token, *copy;
   struct stat st;
   path = strdup(path);
   copy = NULL;
-  while ((token = strsep(&path, "/")) != NULL) {
+  while ((token = strsep(&path, "/")) != NULL)
+  {
     if (strlen(token) == 0) {
       continue;
     }
@@ -50,17 +57,19 @@ mkdir_p(char *path) {
     if (stat(copy, &st) == -1) {
       if (errno == ENOENT) {
         errno = 0;
-        return mkdir(copy, S_IRWXU | S_IFDIR);
+        return (mkdir(copy, S_IRWXU | S_IFDIR));
       } else {
-        return -1;
+        return (-1);
       }
     }
   }
-  return 0;
+  return (0);
 }
 
-static char*
-join_sep(char *str, char *sep) {
+
+static char *
+join_sep(char *str, char *sep)
+{
   int len, i, j;
   char *cpy, *cpyptr;
   len = strlen(str);
@@ -69,10 +78,11 @@ join_sep(char *str, char *sep) {
   memcpy(cpyptr++, sep, 1);
   i = str[0] == *sep ? 1 : 0;
   j = str[len-1] == *sep ? len-1 : len;
-  while(i < j) {
+  while (i < j)
+  {
     memcpy(cpyptr++, &str[i], 1);
     i++;
   }
   memcpy(cpyptr, "\0", 1);
-  return cpy;
+  return (cpy);
 }

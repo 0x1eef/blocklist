@@ -1,6 +1,6 @@
 #include <blocklist.pf/malloc.h>
 
-void*
+void *
 safe_malloc(size_t size)
 {
   void *ptr;
@@ -10,16 +10,18 @@ safe_malloc(size_t size)
     fprintf(stderr, "(fatal): %s", strerror(errno));
     abort();
   }
-  return ptr;
+  return (ptr);
 }
 
-void*
-safe_realloc(void *ptr, size_t size) {
+
+void *
+safe_realloc(void *ptr, size_t size)
+{
   errno = 0;
   ptr = realloc(ptr, size);
-  if(ptr == NULL) {
+  if (ptr == NULL) {
     fprintf(stderr, "(fatal): %s", strerror(errno));
     abort();
   }
-  return ptr;
+  return (ptr);
 }

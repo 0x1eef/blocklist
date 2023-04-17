@@ -7,11 +7,13 @@
 #include <blocklist.pf/path.h>
 
 void
-fetch_cmd(void) {
+fetch_cmd(void)
+{
   dyn_array *ary;
   char *dir, *pth;
   dir = blocklistpf_dir();
-  for (int i = 0; i < (int)(sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0])); i++) {
+  for (int i = 0; i < (int)(sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0])); i++)
+  {
     blocklist bl = BLOCKLISTS[i];
     pth = join_path(dir, bl.filename, NULL);
     ary = fetch_blocklist(&bl);
@@ -25,8 +27,10 @@ fetch_cmd(void) {
   }
 }
 
+
 void
-cat_cmd(void) {
+cat_cmd(void)
+{
   char *str, *dir;
   htable *table;
   dyn_array *blocklists;
@@ -36,12 +40,14 @@ cat_cmd(void) {
   bl_size = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
   table = group_blocklists(BLOCKLISTS, bl_size);
   dir = blocklistpf_dir();
-  for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++) {
+  for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++)
+  {
     item.key = (char *)TABLES[i];
     hsearch_r(item, FIND, &fitem, table);
     printf("table <%s> {\n", fitem->key);
     blocklists = fitem->data;
-    for (int j = 0; j < blocklists->size; j++) {
+    for (int j = 0; j < blocklists->size; j++)
+    {
       blocklist *bl;
       dyn_array *file;
       bl = blocklists->items[j];
@@ -56,4 +62,3 @@ cat_cmd(void) {
     free_set(&set);
   }
 }
-
