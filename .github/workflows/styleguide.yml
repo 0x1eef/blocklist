@@ -1,0 +1,19 @@
+name: blocklist.pf
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  styleguide:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - run: brew install uncrustify
+    - run: uncrustify -c .styleguide.cfg --check src/*.c
