@@ -1,5 +1,4 @@
 #pragma once
-#include <blocklist.pf/hash.h>
 #include <blocklist.pf/dyn_array.h>
 #include <stdlib.h>
 
@@ -15,4 +14,4 @@ typedef struct {
 
 extern const char* TABLES[5];
 extern blocklist BLOCKLISTS[11];
-htable* group_blocklists(blocklist blocklist[], size_t size);
+dyn_array* group_blocklists(const char*);

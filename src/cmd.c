@@ -3,7 +3,6 @@
 #include <blocklist.pf/cmd.h>
 #include <blocklist.pf/set.h>
 #include <blocklist.pf/dyn_array.h>
-#include <blocklist.pf/hash.h>
 #include <blocklist.pf/path.h>
 
 void
@@ -32,25 +31,20 @@ void
 cat_cmd(void)
 {
   char *str, *dir;
-  htable *table;
-  dyn_array *blocklists;
-  hitem item, *fitem;
-  size_t bl_size;
   struct Set set = RB_INITIALIZER(&set);
-  bl_size = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
-  table = group_blocklists(BLOCKLISTS, bl_size);
   dir = blocklistpf_dir();
   for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++)
   {
-    item.key = (char *)TABLES[i];
-    hsearch_r(item, FIND, &fitem, table);
-    printf("table <%s> {\n", fitem->key);
-    blocklists = fitem->data;
-    for (int j = 0; j < blocklists->size; j++)
+    dyn_array *bls;
+    const char *tbl;
+    tbl = TABLES[i];
+    bls = group_blocklists(tbl);
+    printf("table <%s> {\n", tbl);
+    for (int j = 0; j < bls->size; j++)
     {
       blocklist *bl;
       dyn_array *file;
-      bl = blocklists->items[j];
+      bl = bls->items[j];
       printf("##\n# %s\n# %s\n# %s\n", bl->name, bl->desc, bl->url);
       file = read_file(join_path(dir, bl->filename, NULL));
       file = filter_file(file, &set);

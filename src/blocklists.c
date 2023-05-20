@@ -134,29 +134,20 @@ blocklist BLOCKLISTS[] =
   },
 };
 
-htable *
-group_blocklists(blocklist blocklists[], size_t size)
+dyn_array *
+group_blocklists(const char *tbl)
 {
-  htable *table;
-  dyn_array *ary;
-  table = safe_malloc(sizeof(htable));
-  hcreate_r(0, table);
-  for (int i = 0; i < (int)(size); i++)
+  dyn_array *bl_grp;
+  int len;
+  bl_grp = array_init();
+  len = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
+  for (int i = 0; i < len; i++)
   {
-    hitem *item, *fitem;
     blocklist *bl;
-    bl = &blocklists[i];
-    item = safe_malloc(sizeof(hitem));
-    item->key = (char *)bl->table;
-    if (hsearch_r(*item, FIND, &fitem, table) == 0) {
-      ary = array_init();
-      array_push(ary, bl);
-      item->data = ary;
-      hsearch_r(*item, ENTER, &fitem, table);
-    } else {
-      array_push(ary, bl);
-      fitem->data = ary;
+    bl = &BLOCKLISTS[i];
+    if (strncmp(bl->table, tbl, strlen(bl->table)) == 0) {
+      array_push(bl_grp, bl);
     }
   }
-  return (table);
+  return (bl_grp);
 }
