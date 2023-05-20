@@ -24,13 +24,16 @@ format_file(dyn_array *file, int per_line)
     char *line;
     line = chomp(file->items[i - 1]);
     len += strlen(line);
-    ptr = mempcpy(ptr, line, strlen(line));
+    memcpy(ptr, line, strlen(line));
+    ptr += strlen(line);
     if ((i % per_line == 0) || (i == file->size)) {
-      ptr = mempcpy(ptr, " \\\n", 3);
+      memcpy(ptr, " \\\n", 3);
       len += 3;
+      ptr += 3;
     } else {
-      ptr = mempcpy(ptr, ", ", 2);
+      memcpy(ptr, ", ", 2);
       len += 2;
+      ptr += 2;
     }
   }
   str[len] = '\0';
@@ -41,25 +44,24 @@ format_file(dyn_array *file, int per_line)
 dyn_array *
 filter_file(dyn_array *file, struct Set *set)
 {
+  dyn_array *ipset;
+  ipset = array_init();
   for (int i = 0; i < file->size; i++)
   {
     if ((strncmp(file->items[i], "#", 1) == 0) ||
       is_space(file->items[i])) {
-      array_free_item(file, i);
-      i--;
+      continue;
     } else {
       SetNode *node;
       node = safe_malloc(sizeof(SetNode));
       node->str = strdup(file->items[i]);
       if (RB_FIND(Set, set, node) == NULL) {
         RB_INSERT(Set, set, node);
-      } else {
-        array_free_item(file, i);
-        i--;
+        array_push(ipset, node->str);
       }
     }
   }
-  return (file);
+  return (ipset);
 }
 
 

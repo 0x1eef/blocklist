@@ -44,12 +44,12 @@ cat_cmd(void)
     for (int j = 0; j < bls->size; j++)
     {
       blocklist *bl;
-      dyn_array *file;
+      dyn_array *file, *ipset;
       bl = bls->items[j];
       printf("##\n# %s\n# %s\n# %s\n", bl->name, bl->desc, bl->url);
       file = read_file(join_path(dir, bl->filename, NULL));
-      file = filter_file(file, &set);
-      str = format_file(file, 3);
+      ipset = filter_file(file, &set);
+      str = format_file(ipset, 3);
       printf("%s", str);
       free(str);
     }
