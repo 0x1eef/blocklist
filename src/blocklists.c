@@ -7,6 +7,8 @@ const char *TABLES[] =
   "anonymizers", "adware"
 };
 
+int TABLES_LEN = sizeof(TABLES) / sizeof(TABLES[0]);
+
 blocklist BLOCKLISTS[] =
 {
   /**
@@ -134,14 +136,14 @@ blocklist BLOCKLISTS[] =
   },
 };
 
+int BLOCKLISTS_LEN = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
+
 dyn_array *
 group_blocklists(const char *tbl)
 {
   dyn_array *bl_grp;
-  int len;
   bl_grp = array_init();
-  len = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
-  for (int i = 0; i < len; i++)
+  for (int i = 0; i < BLOCKLISTS_LEN; i++)
   {
     blocklist *bl;
     bl = &BLOCKLISTS[i];

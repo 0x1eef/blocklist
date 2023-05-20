@@ -4,6 +4,7 @@
 #include <blocklist.pf/set.h>
 #include <blocklist.pf/dyn_array.h>
 #include <blocklist.pf/path.h>
+#include <blocklist.pf/blocklist.h>
 
 void
 fetch_cmd(void)
@@ -33,7 +34,7 @@ cat_cmd(void)
   char *str, *dir;
   struct Set set = RB_INITIALIZER(&set);
   dir = blocklistpf_dir();
-  for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++)
+  for (int i = 0; i < TABLES_LEN; i++)
   {
     dyn_array *bls;
     const char *tbl;

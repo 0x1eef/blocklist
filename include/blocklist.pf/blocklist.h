@@ -13,5 +13,7 @@ typedef struct {
 
 
 extern const char* TABLES[5];
+extern int TABLES_LEN;
 extern blocklist BLOCKLISTS[11];
+extern int BLOCKLISTS_LEN;
 dyn_array* group_blocklists(const char*);
