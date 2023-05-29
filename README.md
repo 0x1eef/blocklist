@@ -52,7 +52,7 @@ The following tables are made available:
 
 In order of preference, the blocklists that are fetched can be stored in:
 
-* `$BLOCKLISTPF_DIR`
+* `$BLOCKEM_DIR`
 * Otherwise: `$XDG_DATA_HOME/blockem/`
 * Otherwise: `$HOME/.local/share/blockem/`
 * Otherwise: `/usr/local/share/blockem/`
