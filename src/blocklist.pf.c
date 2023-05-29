@@ -1,4 +1,4 @@
-#include <blocklist.pf/cmd.h>
+#include <blockem/cmd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,7 +6,7 @@
 static void
 help(void)
 {
-  printf("Usage: blocklist.pf fetch|cat [OPTIONS]\n");
+  printf("Usage: blockem fetch|cat [OPTIONS]\n");
 }
 
 

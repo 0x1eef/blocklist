@@ -1,10 +1,10 @@
-#include <blocklist.pf/fetch.h>
-#include <blocklist.pf/file.h>
-#include <blocklist.pf/cmd.h>
-#include <blocklist.pf/set.h>
-#include <blocklist.pf/dyn_array.h>
-#include <blocklist.pf/path.h>
-#include <blocklist.pf/blocklist.h>
+#include <blockem/fetch.h>
+#include <blockem/file.h>
+#include <blockem/cmd.h>
+#include <blockem/set.h>
+#include <blockem/dyn_array.h>
+#include <blockem/path.h>
+#include <blockem/blocklist.h>
 
 void
 fetch_cmd(void)

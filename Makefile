@@ -12,7 +12,7 @@ BIN_DIR = bin
 ##
 # Files
 SRC_FILES = $(SRC_DIR)/*.c
-BIN_FILE = $(BIN_DIR)/blocklist.pf
+BIN_FILE = $(BIN_DIR)/blockem
 
 ##
 # Targets

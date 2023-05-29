@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <blocklist.pf/malloc.h>
-#include <blocklist.pf/dyn_array.h>
+#include <blockem/malloc.h>
+#include <blockem/dyn_array.h>
 
 static char * read_line(FILE *f, int blocks);
 

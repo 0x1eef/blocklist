@@ -1,28 +1,29 @@
 ## About
 
-blocklist.pf is a command line utility that can fetch common IP
+blockem is a command line utility that can fetch common IP
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in the
 [`blocklists.c`](/src/blocklists.c)
-file. The project is written in C, still young, one of my few C
-projects, and for now only works on platforms where libfetch is
-available (eg FreeBSD).
+file. The project is written in C, and depends on
+FreeBSD's libfetch but compiles on OpenBSD with
+[0x1eef/libfetch](https://github.com/0x1eef/libfetch)
+installed.
 
 ## Examples
 
 * **CLI**
 
         # Fetch the blocklists.
-        $ blocklist.pf fetch
+        $ blockem fetch
 
-        # Cat all PF tables to "/usr/local/share/pf/blocklist.pf"
-        $ blocklist.pf cat > /usr/local/share/pf/blocklist.pf
+        # Cat all PF tables to "/usr/local/share/pf/blockem"
+        $ blockem cat > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
 
         blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
-        include "/usr/local/share/pf/blocklist.pf"
+        include "/usr/local/share/pf/blocklists"
 
         block all
         block in quick on ue0 from $blocklists to any
@@ -52,22 +53,22 @@ The following tables are made available:
 In order of preference, the blocklists that are fetched can be stored in:
 
 * `$BLOCKLISTPF_DIR`
-* Otherwise: `$XDG_DATA_HOME/blocklist.pf/`
-* Otherwise: `$HOME/.local/share/blocklist.pf/`
-* Otherwise: `/usr/local/share/blocklist.pf/`
+* Otherwise: `$XDG_DATA_HOME/blockem/`
+* Otherwise: `$HOME/.local/share/blockem/`
+* Otherwise: `/usr/local/share/blockem/`
 
 ## Install
 
-    git clone https://github.com/0x1eef/blocklist.pf
-    cd blocklist.pf
+    git clone https://github.com/0x1eef/blockem
+    cd blockem
     make build
-    ./bin/blocklist.pf
+    ./bin/blockem
 
 ## Sources
 
-* [Source code (GitHub)](https://github.com/0x1eef/blocklist.pf#readme)
-* [Source code (GitLab)](https://gitlab.com/0x1eef/blocklist.pf#about)
-* [Source code (HardenedBSD)](https://git.hardenedbsd.org/0x1eef/blocklist.pf#about)
+* [Source code (GitHub)](https://github.com/0x1eef/blockem#readme)
+* [Source code (GitLab)](https://gitlab.com/0x1eef/blockem#about)
+* [Source code (HardenedBSD)](https://git.hardenedbsd.org/0x1eef/blockem#about)
 
 ## License
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <blocklist.pf/dyn_array.h>
+#include <blockem/dyn_array.h>
 #include <stdlib.h>
 
 typedef struct {
