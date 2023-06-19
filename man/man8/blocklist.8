@@ -1,0 +1,35 @@
+.Dd May 2023
+.Dt BLOCKLIST 8
+.Os
+.Sh NAME
+.Nm blocklist
+- provides blocklists as PF tables
+.Sh SYNOPSIS
+.Nm blocklist fetch
+.Nm blocklist cat
+.Sh DESCRIPTION
+.Nm blocklist
+is a command line utility that can fetch common IP
+blocklists, and from those blocklists create PF tables that can
+be used when crafting firewall rules in
+.Pa /etc/pf.conf .
+.Pp
+.Sh EXAMPLES
+.Pp
+.Nm blocklist fetch
+.br
+Fetch and store blocklists to disk.
+.Pp
+.Nm blocklist cat
+.br
+Write PF tables to standard output.
+.Pp
+.Sh ENVIRONMENT VARIABLES
+.Bl -tag -width $BLOCKLIST_DIR
+.It BLOCKLIST_DIR
+The directory where blocklists should be stored after being fetched.
+.Sh AUTHORS
+The
+.Nm blocklist
+utility and this manual page were written by
+0x1eef <0x1eef@protonmail.com>.
