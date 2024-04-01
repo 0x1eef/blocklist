@@ -1,8 +1,12 @@
 #include <blocklist/command.h>
+#include <blocklist/blocklist.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
 static void print_usage(void);
+static int parse_optstr(int, char *const *, const char *);
 
 int
 main(int argc, char *argv[])
@@ -22,9 +26,38 @@ main(int argc, char *argv[])
   }
   else
   {
-    print_usage();
-    return (EXIT_FAILURE);
+    switch (parse_optstr(argc, argv, "v"))
+    {
+    case -2:
+      print_usage();
+      return (EXIT_FAILURE);
+    case -1:
+      return (EXIT_FAILURE);
+    case 0:
+      printf("%s\n", BLOCKLIST_VERSION);
+      return (EXIT_SUCCESS);
+    }
   }
+}
+
+static int
+parse_optstr(int argc, char *const *argv, const char *optstr)
+{
+  int j, k;
+  j = -2;
+  while ((k = getopt(argc, argv, optstr)) != -1)
+  {
+    if (k == '?')
+    {
+      j = -1;
+      break;
+    }
+    else
+    {
+      j = 0;
+    }
+  }
+  return j;
 }
 
 static void

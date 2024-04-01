@@ -18,6 +18,7 @@ struct blocklist {
 char* blocklist_path(const char*);
 int blocklist_store(const char*, const char*);
 
-#define	NULL_BLOCKLIST                                     \
+#define BLOCKLIST_VERSION "v0.3.2"
+#define NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
                              NULL, NULL, NULL, NULL, NULL, }
