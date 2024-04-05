@@ -15,7 +15,7 @@ The available blocklists can be found in
         $ blocklist download
 
         # Emit pf.conf(5) tables
-        $ blocklist emit > /usr/local/share/pf/blocklists
+        $ blocklist emit > /usr/local/share/pf/blocklist
 
 * **`/etc/pf.conf`**
 
