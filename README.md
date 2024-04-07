@@ -11,6 +11,10 @@ The available blocklists can be found in
 
 * **CLI**
 
+        # Setup directories
+        $ mkdir -p ~/.local/share/blocklist/
+        $ mkdir -p /usr/local/share/pf/
+
         # Download blocklists into ~/.local/share/blocklist/
         $ blocklist download
 
@@ -19,13 +23,13 @@ The available blocklists can be found in
 
 * **`/etc/pf.conf`**
 
-        include "/usr/local/share/pf/blocklists"
-        blocklists = "{ <attacks>, <malware>, <anonymizers>, <adware> }"
+        include "/usr/local/share/pf/blocklist"
+        blocklist = "{ <attacks>, <malware>, <anonymizers>, <adware> }"
 
         set skip on lo0
         block all
         pass out on ue0
-        block out on ue0 from any to $blocklists
+        block out on ue0 from any to $blocklist
 
 ## Tables
 
