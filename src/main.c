@@ -1,9 +1,9 @@
 #include <blocklist/command.h>
 #include <blocklist/blocklist.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sysexits.h>
 
 static void print_usage(void);
 static int parse_optstr(int, char *const *, const char *);
@@ -14,7 +14,7 @@ main(int argc, char *argv[])
   if (argc < 2)
   {
     print_usage();
-    return (EXIT_FAILURE);
+    return (EX_USAGE);
   }
   else if (strcmp(argv[1], "download") == 0)
   {
@@ -30,12 +30,12 @@ main(int argc, char *argv[])
     {
     case -2:
       print_usage();
-      return (EXIT_FAILURE);
+      return (EX_USAGE);
     case -1:
-      return (EXIT_FAILURE);
+      return (EX_USAGE);
     case 0:
       printf("%s\n", BLOCKLIST_VERSION);
-      return (EXIT_SUCCESS);
+      return (EX_OK);
     }
   }
 }
