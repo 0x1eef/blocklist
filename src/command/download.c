@@ -1,7 +1,8 @@
 #include <blocklist/blocklists.h>
-#include <stdlib.h>
 #include <curl/curl.h>
 #include <errno.h>
+#include <sysexits.h>
+#include <stdlib.h>
 #include <string.h>
 
 int
@@ -23,12 +24,13 @@ download_command(void)
       if (err == -1)
       {
         fprintf(stderr, "[fatal] %s: %s\n", path, strerror(errno));
+        return (EX_IOERR);
       }
       else
       {
-        fprintf(stderr, "[fatal] network error (%s)\n", block->url);
+        fprintf(stderr, "[fatal] network error (%s)\n", url);
+        return (EX_UNAVAILABLE);
       }
-      return (EXIT_FAILURE);
     }
     else
     {
@@ -38,5 +40,5 @@ download_command(void)
     free(path);
   }
   free(enabled);
-  return (EXIT_SUCCESS);
+  return (EX_OK);
 }
