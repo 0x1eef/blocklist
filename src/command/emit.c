@@ -1,6 +1,7 @@
 #include <blocklist/alloc.h>
 #include <blocklist/blocklists.h>
 #include <errno.h>
+#include <sysexits.h>
 #include <isinetaddr.h>
 #include <string.h>
 
@@ -31,7 +32,7 @@ emit_command(void)
     free(blocks);
   }
   free(enabled);
-  return (EXIT_SUCCESS);
+  return (EX_OK);
 }
 
 static void
