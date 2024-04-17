@@ -9,10 +9,11 @@ static block ALL_BLOCKS[] = {
     /**
      * table = attacks
      **/
-    [0] = {.name  = "firehol (level 1)",
-           .desc  = "A set of IP addresses all internet facing servers, "
-                    "routers and firewalls shouldn't communicate with.",
-           .table = "attacks",
+    [0] = {.id       = 1,
+           .name     = "firehol (level 1)",
+           .desc     = "A set of IP addresses all internet facing servers, "
+                       "routers and firewalls shouldn't communicate with.",
+           .table    = "attacks",
            .filename = "attacks_firehol1.txt",
            .url     = "https://iplists.firehol.org/files/firehol_level1.netset",
            .www     = "https://iplists.firehol.org/?ipset=firehol_level1",
@@ -20,22 +21,26 @@ static block ALL_BLOCKS[] = {
            .enabled = true,
            .local_path = blocklist_localpath,
            .write      = blocklist_write},
-    [1] = {.name     = "firehol (web server)",
-           .desc     = "A set of IP addresses a web server shouldn't communicate with."
-           .table    = "attacks",
-           .filename = "attacks_fireholwebserver.txt",
-           .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
-           .www = "https://iplists.firehol.org/?ipset=firehol_webserver",
-           .format     = "netset",
-           .enabled    = true,
-           .local_path = blocklist_localpath,
-           .write      = blocklist_write},
+    [1]
+    = {.id   = 2,
+       .name = "firehol (web server)",
+       .desc = "A set of IP addresses a web server shouldn't communicate with.",
+       .table    = "attacks",
+       .filename = "attacks_fireholwebserver.txt",
+       .url      = "https://iplists.firehol.org/files/firehol_webserver.netset",
+       .www      = "https://iplists.firehol.org/?ipset=firehol_webserver",
+       .format   = "netset",
+       .enabled  = true,
+       .local_path = blocklist_localpath,
+       .write      = blocklist_write},
 
     /**
      * table = malware
      **/
-    [2] = {.name     = "firehol (web browser)",
-           .desc     = "A set of IP addresses a web browser shouldn't communicate with."
+    [2] = {.id   = 3,
+           .name = "firehol (web browser)",
+           .desc
+           = "A set of IP addresses a web browser shouldn't communicate with.",
            .filename = "malware_fireholwebclient.txt",
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
@@ -48,7 +53,8 @@ static block ALL_BLOCKS[] = {
     /**
      * table = anonymizers
      **/
-    [3] = {.name       = "TOR exit nodes",
+    [3] = {.id         = 4,
+           .name       = "TOR exit nodes",
            .desc       = "A set of IP addresses that act as Tor exit nodes.",
            .filename   = "anonymizers_torexit.txt",
            .table      = "anonymizers",
@@ -62,7 +68,8 @@ static block ALL_BLOCKS[] = {
     /**
      * table = adware
      **/
-    [4] = {.name     = "adservers",
+    [4] = {.id       = 5,
+           .name     = "adservers",
            .desc     = "A set of IP addresses associated with adware.",
            .filename = "adware_yoyoadservers.txt",
            .table    = "adware",

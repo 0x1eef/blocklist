@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 struct block {
+  int id;
   const char *name;
   const char *desc;
   const char *table;
@@ -20,6 +21,6 @@ int blocklist_write(const char*, const char*);
 
 #define BLOCKLIST_VERSION "v0.3.3"
 #define NULL_BLOCKLIST                                     \
-        (struct block) { NULL, NULL, NULL, NULL, NULL, \
+        (struct block) { 0, NULL, NULL, NULL, NULL, NULL, \
                              NULL, NULL, NULL, NULL, NULL, }
 typedef struct block block;
