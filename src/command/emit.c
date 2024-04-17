@@ -6,9 +6,9 @@
 #include <string.h>
 
 static const int MAXLEN = 128;
-static char *tablenames[]
+static const char *tablenames[]
     = {"attacks", "malware", "anonymizers", "adware", NULL};
-static int write_table_head(FILE *, char *);
+static int write_table_head(FILE *, const char *);
 static int write_table_body(FILE *, FILE *);
 static int write_table_tail(FILE *);
 static int write_table_comment(FILE *, block *);
@@ -16,38 +16,37 @@ static int write_table_comment(FILE *, block *);
 int
 emit_command(void)
 {
-  char **tname   = tablenames;
-  block *enabled = blocklists_all("enabled");
-  while (*tname != NULL)
+  const char **name = tablenames;
+  block *enabled    = blocklists_all("enabled");
+  while (*name != NULL)
   {
-    block *blocks = blocklists_group(enabled, *tname);
+    block *blocks = blocklists_group(enabled, *name);
     block *block  = blocks;
-    write_table_head(stdout, *tname);
-    write_table_comment(stdout, block);
+    write_table_head(stdout, *name);
     while (block->name != NULL)
     {
       char *path = block->path(block->filename);
       FILE *in   = fopen(path, "r");
-      if (in == NULL)
+      write_table_comment(stdout, block);
+      if (in == NULL || write_table_body(stdout, in))
+      {
         return (EX_IOERR);
-      else if (write_table_body(stdout, in))
-        return (EX_IOERR);
-      else
-        free(path);
+      }
+      free(path);
       block++;
     }
     write_table_tail(stdout);
+    name++;
     free(blocks);
-    tname++;
   }
   free(enabled);
   return (EX_OK);
 }
 
 static int
-write_table_head(FILE *out, char *tname)
+write_table_head(FILE *out, const char *name)
 {
-  fprintf(out, "table <%s> {\n", tname);
+  fprintf(out, "table <%s> {\n", name);
   return 0;
 }
 
@@ -84,12 +83,14 @@ static int
 write_table_comment(FILE *out, block *block)
 {
   fprintf(out,
-          "##\n"
-          "# %s\n"
-          "# %s\n"
-          "# %s\n",
+          "  ##\n"
+          "  # %s\n"
+          "  # %s\n"
+          "  # www: %s\n"
+          "  # raw: %s\n",
           block->name,
           block->desc,
+          block->www,
           block->url);
   return 0;
 }

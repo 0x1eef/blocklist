@@ -7,7 +7,7 @@ struct blocklist {
   const char *desc;
   const char *table;
   const char *url;
-  const char *about_url;
+  const char *www;
   const char *filename;
   const char *format;
   bool enabled;
