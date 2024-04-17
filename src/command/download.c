@@ -1,4 +1,4 @@
-#include <blocklist/blocklists.h>
+#include <blocklist/blocks.h>
 #include <curl/curl.h>
 #include <errno.h>
 #include <sysexits.h>
@@ -10,15 +10,13 @@ download_command(void)
 {
   block *enabled;
   block *block;
-  enabled = blocklists_all("enabled");
+  enabled = blocks_all("enabled");
   block   = enabled;
   while (block->name != NULL)
   {
-    char *url, *path;
-    int err;
-    url  = (char *)block->url;
-    path = block->path(block->filename);
-    err  = block->store(url, path);
+    const char *url = block->url;
+    char *path      = block->local_path(block);
+    int err         = block->write(path, url);
     if (err)
     {
       if (err == -1)

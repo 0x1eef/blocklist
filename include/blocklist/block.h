@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-struct blocklist {
+struct block {
   const char *name;
   const char *desc;
   const char *table;
@@ -11,15 +11,15 @@ struct blocklist {
   const char *filename;
   const char *format;
   bool enabled;
-  char* (*path)(const char*);
-  int (*store)(const char*, const char*);
+  char* (*local_path)(struct block*);
+  int (*write)(const char*, const char*);
 };
 
-char* blocklist_path(const char*);
-int blocklist_store(const char*, const char*);
+char* blocklist_localpath(struct block*);
+int blocklist_write(const char*, const char*);
 
 #define BLOCKLIST_VERSION "v0.3.3"
 #define NULL_BLOCKLIST                                     \
-        (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
+        (struct block) { NULL, NULL, NULL, NULL, NULL, \
                              NULL, NULL, NULL, NULL, NULL, }
-typedef struct blocklist block;
+typedef struct block block;

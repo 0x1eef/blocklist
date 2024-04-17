@@ -1,5 +1,5 @@
 #include <blocklist/alloc.h>
-#include <blocklist/blocklists.h>
+#include <blocklist/blocks.h>
 #include <errno.h>
 #include <sysexits.h>
 #include <isinetaddr.h>
@@ -17,15 +17,15 @@ int
 emit_command(void)
 {
   const char **name = tablenames;
-  block *enabled    = blocklists_all("enabled");
+  block *enabled    = blocks_all("enabled");
   while (*name != NULL)
   {
-    block *blocks = blocklists_group(enabled, *name);
+    block *blocks = blocks_group(enabled, *name);
     block *block  = blocks;
     write_table_head(stdout, *name);
     while (block->name != NULL)
     {
-      char *path = block->path(block->filename);
+      char *path = block->local_path(block);
       FILE *in   = fopen(path, "r");
       write_table_comment(stdout, block);
       if (in == NULL || write_table_body(stdout, in))

@@ -1,14 +1,14 @@
 #include <blocklist/alloc.h>
-#include <blocklist/blocklist.h>
+#include <blocklist/block.h>
 #include <errno.h>
 #include <string.h>
 #include <curl/curl.h>
 
 char *
-blocklist_path(const char *filename)
+blocklist_localpath(block *self)
 {
-  char *home;
-  home = getenv("HOME");
+  char *home           = getenv("HOME");
+  const char *filename = self->filename;
   if (home)
   {
     char *relpath  = "/.local/share/blocklist/", *fullpath;
@@ -36,7 +36,7 @@ blocklist_path(const char *filename)
 }
 
 int
-blocklist_store(const char *urlstr, const char *path)
+blocklist_write(const char *path, const char *url)
 {
   FILE *file;
   file = fopen(path, "w");
@@ -49,7 +49,7 @@ blocklist_store(const char *urlstr, const char *path)
     CURL *curl;
     CURLcode res;
     curl = curl_easy_init();
-    curl_easy_setopt(curl, CURLOPT_URL, urlstr);
+    curl_easy_setopt(curl, CURLOPT_URL, url);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
     res = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
