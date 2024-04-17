@@ -5,7 +5,7 @@ blocklists, and from those blocklists emit
 [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
 tables that can be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in
-[`src/blocklists.c`](/src/blocklists.c).
+[`src/blocks.c`](/src/blocks.c).
 
 ## Examples
 
