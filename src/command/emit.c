@@ -20,7 +20,8 @@ emit_command(void)
   block *enabled = blocklists_all("enabled");
   while (*tname != NULL)
   {
-    block *block = blocklists_group(enabled, *tname);
+    block *blocks = blocklists_group(enabled, *tname);
+    block *block  = blocks;
     write_table_head(stdout, *tname);
     write_table_comment(stdout, block);
     while (block->name != NULL)
@@ -36,7 +37,7 @@ emit_command(void)
       block++;
     }
     write_table_tail(stdout);
-    free(block);
+    free(blocks);
     tname++;
   }
   free(enabled);
