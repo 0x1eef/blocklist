@@ -8,8 +8,8 @@
 int
 download_command(void)
 {
-  struct blocklist *enabled;
-  struct blocklist *block;
+  block *enabled;
+  block *block;
   enabled = blocklists_all("enabled");
   block   = enabled;
   while (block->name != NULL)

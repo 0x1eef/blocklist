@@ -22,3 +22,4 @@ int blocklist_store(const char*, const char*);
 #define NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
                              NULL, NULL, NULL, NULL, NULL, }
+typedef struct blocklist block;

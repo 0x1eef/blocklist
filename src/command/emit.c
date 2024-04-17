@@ -6,81 +6,83 @@
 #include <string.h>
 
 static const int MAXLEN = 128;
-static char *tables[]   = {"attacks", "malware", "anonymizers", "adware", NULL};
-static void table_head(FILE *, char *);
-static void table_body(FILE *, struct blocklist[]);
-static void table_tail(FILE *);
-static void comment(FILE *, struct blocklist *);
+static char *tablenames[]
+    = {"attacks", "malware", "anonymizers", "adware", NULL};
+static int write_table_head(FILE *, char *);
+static int write_table_body(FILE *, FILE *);
+static int write_table_tail(FILE *);
+static int write_table_comment(FILE *, block *);
 
 int
 emit_command(void)
 {
-  char **cursor;
-  struct blocklist *enabled;
-  cursor  = tables;
-  enabled = blocklists_all("enabled");
-  while (*cursor != NULL)
+  char **tname   = tablenames;
+  block *enabled = blocklists_all("enabled");
+  while (*tname != NULL)
   {
-    char *table;
-    struct blocklist *blocks;
-    table  = *cursor;
-    blocks = blocklists_group(enabled, table);
-    table_head(stdout, table);
-    table_body(stdout, blocks);
-    table_tail(stdout);
-    cursor++;
-    free(blocks);
+    block *block = blocklists_group(enabled, *tname);
+    write_table_head(stdout, *tname);
+    write_table_comment(stdout, block);
+    while (block->name != NULL)
+    {
+      char *path = block->path(block->filename);
+      FILE *in   = fopen(path, "r");
+      if (in == NULL)
+        return (EX_IOERR);
+      else if (write_table_body(stdout, in))
+        return (EX_IOERR);
+      else
+        free(path);
+      block++;
+    }
+    write_table_tail(stdout);
+    free(block);
+    tname++;
   }
   free(enabled);
   return (EX_OK);
 }
 
-static void
-table_head(FILE *fd, char *table)
+static int
+write_table_head(FILE *out, char *tname)
 {
-  fprintf(fd, "table <%s> {\n", table);
+  fprintf(out, "table <%s> {\n", tname);
+  return 0;
 }
 
-static void
-table_body(FILE *fd, struct blocklist blocks[])
+static int
+write_table_body(FILE *out, FILE *in)
 {
-  struct blocklist *block;
   char buf[MAXLEN];
-  block = blocks;
-  while (block->name != NULL)
+  int err = 0;
+  errno   = 0;
+  while (fgets(buf, MAXLEN, in))
   {
-    char *path;
-    FILE *file;
-    path = block->path(block->filename);
-    file = fopen(path, "r");
-    if (file)
+    buf[strcspn(buf, "\n")] = '\0';
+    if (iscidraddr4(buf))
     {
-      comment(fd, block);
-      while (fgets(buf, MAXLEN, file))
-      {
-        buf[strcspn(buf, "\n")] = '\0';
-        if (iscidraddr4(buf))
-        {
-          fprintf(fd, "  %s\n", buf);
-        }
-      }
-      fclose(file);
+      fprintf(out, "  %s\n", buf);
     }
-    free(path);
-    block++;
+    if (errno)
+    {
+      err = -1;
+      break;
+    }
   }
+  return err;
 }
 
-static void
-table_tail(FILE *fd)
+static int
+write_table_tail(FILE *out)
 {
-  fprintf(fd, "}\n");
+  fprintf(out, "}\n");
+  return 0;
 }
 
-static void
-comment(FILE *fd, struct blocklist *block)
+static int
+write_table_comment(FILE *out, block *block)
 {
-  fprintf(fd,
+  fprintf(out,
           "##\n"
           "# %s\n"
           "# %s\n"
@@ -88,4 +90,5 @@ comment(FILE *fd, struct blocklist *block)
           block->name,
           block->desc,
           block->url);
+  return 0;
 }

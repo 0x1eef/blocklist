@@ -5,7 +5,7 @@
 #include <sys/param.h>
 #include <curl/curl.h>
 
-static struct blocklist BLOCKLISTS[] = {
+static block BLOCKLISTS[] = {
     /**
      * table = attacks
      **/
@@ -80,7 +80,7 @@ static struct blocklist BLOCKLISTS[] = {
      **/
     [5] = NULL_BLOCKLIST};
 
-struct blocklist *
+block *
 blocklists_all(const char *state)
 {
   if (strcmp(state, "enabled") == 0)
@@ -97,14 +97,14 @@ blocklists_all(const char *state)
   }
 }
 
-struct blocklist *
-blocklists_enabled(struct blocklist blocklist[])
+block *
+blocklists_enabled(block blocklist[])
 {
-  struct blocklist *enabled;
-  struct blocklist *dest;
+  block *enabled;
+  block *dest;
   size_t size;
   size    = blocklists_size(blocklist);
-  enabled = alloc(sizeof(struct blocklist) * (size + 1));
+  enabled = alloc(sizeof(block) * (size + 1));
   dest    = enabled;
   while (blocklist->name != NULL)
   {
@@ -119,14 +119,14 @@ blocklists_enabled(struct blocklist blocklist[])
   return (enabled);
 }
 
-struct blocklist *
-blocklists_disabled(struct blocklist blocklist[])
+block *
+blocklists_disabled(block blocklist[])
 {
-  struct blocklist *disabled;
-  struct blocklist *dest;
+  block *disabled;
+  block *dest;
   size_t size;
   size     = blocklists_size(blocklist);
-  disabled = alloc(sizeof(struct blocklist) * (size + 1));
+  disabled = alloc(sizeof(block) * (size + 1));
   dest     = disabled;
   while (blocklist->name != NULL)
   {
@@ -141,14 +141,14 @@ blocklists_disabled(struct blocklist blocklist[])
   return (disabled);
 }
 
-struct blocklist *
-blocklists_group(struct blocklist blocklist[], const char *table)
+block *
+blocklists_group(block blocklist[], const char *table)
 {
-  struct blocklist *group;
-  struct blocklist *dest;
+  block *group;
+  block *dest;
   size_t size;
   size  = blocklists_size(blocklist);
-  group = alloc(sizeof(struct blocklist) * (size + 1));
+  group = alloc(sizeof(block) * (size + 1));
   dest  = group;
   while (blocklist->name != NULL)
   {
@@ -164,7 +164,7 @@ blocklists_group(struct blocklist blocklist[], const char *table)
 }
 
 size_t
-blocklists_size(struct blocklist blocklist[])
+blocklists_size(block blocklist[])
 {
   size_t size = 0;
   while (blocklist->name != NULL)
