@@ -19,7 +19,7 @@ struct block {
 char* blocklist_localpath(struct block*);
 int blocklist_write(const char*, const char*);
 
-#define BLOCKLIST_VERSION "v0.3.3"
+#define BLOCKLIST_VERSION "v0.4.0"
 #define NULL_BLOCKLIST                                     \
         (struct block) { 0, NULL, NULL, NULL, NULL, NULL, \
                              NULL, NULL, NULL, NULL, NULL, }
