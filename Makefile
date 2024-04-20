@@ -21,7 +21,7 @@ BIN_FILE = $(BIN_DIR)/blocklist
 # Targets
 build: clean $(BIN_FILE)
 
-install:
+install: build
 	@if [ -e "$(BIN_FILE)" ]; then \
 		set -x; \
 		install -s $(BIN_FILE) $(PREFIX)/bin/blocklist; \
