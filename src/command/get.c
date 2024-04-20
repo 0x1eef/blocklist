@@ -6,7 +6,7 @@
 #include <string.h>
 
 int
-download_command(void)
+get_command(void)
 {
   block *enabled;
   block *block;

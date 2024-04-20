@@ -16,7 +16,7 @@ The available blocklists can be found in
         $ mkdir -p /usr/local/share/pf/
 
         # Download blocklists into ~/.local/share/blocklist/
-        $ blocklist download
+        $ blocklist get
 
         # Emit pf.conf(5) tables
         $ blocklist emit > /usr/local/share/pf/blocklist
