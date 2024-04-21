@@ -21,18 +21,18 @@ get_command(void)
     {
       if (err == -1)
       {
-        fprintf(stderr, "[fatal] %s: %s\n", path, strerror(errno));
+        fprintf(stderr, "[x] %s (%s)\n", strerror(errno), path);
         return (EX_IOERR);
       }
       else
       {
-        fprintf(stderr, "[fatal] network error (%s)\n", url);
+        fprintf(stderr, "[x] network error (%s)\n", url);
         return (EX_UNAVAILABLE);
       }
     }
     else
     {
-      printf("[ok] %s\n", path);
+      fprintf(stdout, "[-] GET\t%s\n", path);
     }
     block++;
     free(path);
