@@ -1,6 +1,9 @@
 #include <blocklist/alloc.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sysexits.h>
+#include <string.h>
+#include <errno.h>
 
 void *
 alloc(size_t size)
@@ -9,8 +12,8 @@ alloc(size_t size)
   mem = malloc(size);
   if (mem == NULL)
   {
-    perror("malloc");
-    exit(EXIT_FAILURE);
+    fprintf(stderr, "[x] %s", strerror(errno));
+    exit(EX_OSERR);
   }
   return (mem);
 }

@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <string.h>
 #include <curl/curl.h>
+#include <sysexits.h>
 
 char *
 blocklist_localpath(block *self)
@@ -29,8 +30,8 @@ blocklist_localpath(block *self)
     }
     else
     {
-      fprintf(stderr, "[fatal] %s", strerror(errno));
-      abort();
+      fprintf(stderr, "[x] %s", strerror(errno));
+      exit(EX_OSERR);
     }
   }
 }
