@@ -10,7 +10,7 @@ static block ALL_BLOCKS[] = {
      * table = attacks
      **/
     [0] = {.id       = 1,
-           .name     = "firehol (level 1)",
+           .name     = "firehol [level 1]",
            .desc     = "A set of IP addresses all internet facing servers, "
                        "routers and firewalls shouldn't communicate with.",
            .table    = "attacks",
@@ -23,7 +23,7 @@ static block ALL_BLOCKS[] = {
            .write      = blocklist_write},
     [1]
     = {.id   = 2,
-       .name = "firehol (web server)",
+       .name = "firehol [web server]",
        .desc = "A set of IP addresses a web server shouldn't communicate with.",
        .table    = "attacks",
        .filename = "attacks_fireholwebserver.txt",
@@ -38,7 +38,7 @@ static block ALL_BLOCKS[] = {
      * table = malware
      **/
     [2] = {.id   = 3,
-           .name = "firehol (web browser)",
+           .name = "firehol [web browser]",
            .desc
            = "A set of IP addresses a web browser shouldn't communicate with.",
            .filename = "malware_fireholwebclient.txt",
