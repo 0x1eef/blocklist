@@ -32,7 +32,7 @@ emit_command(void)
         write_table_comment(stdout, block);
         if (in == NULL || write_table_body(stdout, in))
         {
-          fprintf(stderr, "[x] read failure (%s)\n", path);
+          fprintf(stderr, "[x] %s: IO error\n", path);
           return (EX_IOERR);
         }
         free(path);
