@@ -26,14 +26,21 @@ emit_command(void)
     while (block->name != NULL)
     {
       char *path = block->local_path(block);
-      FILE *in   = fopen(path, "r");
-      write_table_comment(stdout, block);
-      if (in == NULL || write_table_body(stdout, in))
+      if (path)
+      {
+        FILE *in = fopen(path, "r");
+        write_table_comment(stdout, block);
+        if (in == NULL || write_table_body(stdout, in))
+        {
+          return (EX_IOERR);
+        }
+        free(path);
+        block++;
+      }
+      else
       {
         return (EX_IOERR);
       }
-      free(path);
-      block++;
     }
     write_table_tail(stdout);
     name++;

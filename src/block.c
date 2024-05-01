@@ -12,7 +12,7 @@ blocklist_localpath(block *self)
   const char *filename = self->filename;
   if (home)
   {
-    char *relpath  = "/.local/share/blocklist/", *fullpath;
+    char *relpath  = "/.local/share/blocks/", *fullpath;
     size_t offset1 = strlen(home), offset2 = strlen(relpath),
            bufsize = offset1 + offset2 + strlen(filename) + 1;
     fullpath       = alloc(sizeof(char) * bufsize);
@@ -23,16 +23,7 @@ blocklist_localpath(block *self)
   }
   else
   {
-    char *fullpath = strdup("/usr/local/share/pf/blocklist");
-    if (fullpath)
-    {
-      return (fullpath);
-    }
-    else
-    {
-      fprintf(stderr, "[x] %s", strerror(errno));
-      exit(EX_OSERR);
-    }
+    return NULL;
   }
 }
 

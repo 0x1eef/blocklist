@@ -1,6 +1,6 @@
 ## About
 
-blocklist is a command line utility that can download common IPv4
+blocks is a command line utility that can download common IPv4
 blocklists, and from those blocklists emit
 [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
 tables that can be used when crafting firewall rules in `/etc/pf.conf`.
@@ -12,14 +12,14 @@ The available blocklists can be found in
 * **CLI**
 
         # Setup directories
-        $ mkdir -p ~/.local/share/blocklist/
+        $ mkdir -p ~/.local/share/blocks/
         $ mkdir -p /usr/local/share/pf/
 
-        # Download blocklists into ~/.local/share/blocklist/
-        $ blocklist get
+        # Download blocklists into ~/.local/share/blocks/
+        $ blocks get
 
         # Emit pf.conf(5) tables
-        $ blocklist emit > /usr/local/share/pf/blocklist
+        $ blocks emit > /usr/local/share/pf/blocklist
 
 * **`/etc/pf.conf`**
 
@@ -45,8 +45,8 @@ The available blocklists can be found in
 ## Install
 
     # Clone repository
-    $ git clone https://github.com/0x1eef/blocklist
-    $ cd blocklist
+    $ git clone https://github.com/0x1eef/blocks
+    $ cd blocks
 
     # Build and install
     $ make build

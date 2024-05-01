@@ -1,15 +1,15 @@
 .Dd May 2023
-.Dt BLOCKLIST 8
+.Dt BLOCKS 8
 .Os
 .Sh NAME
-.Nm blocklist
+.Nm blocks
 - emit pf.conf(5) tables from common IPv4 blocklists
 .Sh SYNOPSIS
-blocklist get
+blocks get
 .br
-blocklist echo
+blocks emit
 .Sh DESCRIPTION
-.Nm blocklist
+.Nm blocks
 is a command line utility that can download common
 IPv4 blocklists, and from those blocklists emit
 pf.conf(5) tables that can be used when crafting firewall
@@ -18,16 +18,16 @@ rules in
 .Pp
 .Sh EXAMPLES
 .Pp
-.Nm blocklist get
+.Nm blocks get
 .br
-Download blocklists into ~/.local/share/blocklist/.
+Download blocklists into ~/.local/share/blocks/.
 .Pp
-.Nm blocklist emit
+.Nm blockls emit
 .br
 Emit pf.conf(5) tables to standard output.
 .Pp
 .Sh AUTHORS
 The
-.Nm blocklist
+.Nm blocks
 utility and this manual page were written
 by 0x1eef <0x1eef@protonmail.com>.
