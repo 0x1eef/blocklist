@@ -56,8 +56,8 @@ The available blocklists can be found in
 
 * [libcurl](https://curl.se/libcurl/)
   is a required runtime dependency.
-* [blocklist.cron](https://github.com/0x1eef/blocklist.cron#readme)
-  configures blocklist to run at regular intervals via
+* [blocks + cron](https://github.com/0x1eef/blocks.cron#readme)
+  configures blocks to run at regular intervals via
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Sources
