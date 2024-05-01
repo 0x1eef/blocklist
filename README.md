@@ -48,9 +48,8 @@ The available blocklists can be found in
     $ git clone https://github.com/0x1eef/blocks
     $ cd blocks
 
-    # Build and install
-    $ make build
-    # make install
+    # Install
+    $ doas -u root -- make install
 
 ## See also
 
