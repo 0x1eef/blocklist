@@ -1,5 +1,6 @@
-#include <blocklist/alloc.h>
-#include <blocklist/blocks.h>
+#include <blocks/alloc.h>
+#include <blocks/block.h>
+#include <blocks/blocks.h>
 #include <string.h>
 #include <stdio.h>
 #include <sys/param.h>
@@ -19,8 +20,8 @@ static block ALL_BLOCKS[] = {
            .www     = "https://iplists.firehol.org/?ipset=firehol_level1",
            .format  = "netset",
            .enabled = true,
-           .local_path = blocklist_localpath,
-           .write      = blocklist_write},
+           .path    = block_path,
+           .write   = block_write},
     [1]
     = {.id   = 2,
        .name = "firehol [web server]",
@@ -31,8 +32,8 @@ static block ALL_BLOCKS[] = {
        .www      = "https://iplists.firehol.org/?ipset=firehol_webserver",
        .format   = "netset",
        .enabled  = true,
-       .local_path = blocklist_localpath,
-       .write      = blocklist_write},
+       .path     = block_path,
+       .write    = block_write},
 
     /**
      * table = malware
@@ -45,25 +46,25 @@ static block ALL_BLOCKS[] = {
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
            .www = "https://iplists.firehol.org/?ipset=firehol_webclient",
-           .format     = "netset",
-           .enabled    = true,
-           .local_path = blocklist_localpath,
-           .write      = blocklist_write},
+           .format  = "netset",
+           .enabled = true,
+           .path    = block_path,
+           .write   = block_write},
 
     /**
      * table = anonymizers
      **/
-    [3] = {.id         = 4,
-           .name       = "TOR exit nodes",
-           .desc       = "A set of IP addresses that act as Tor exit nodes.",
-           .filename   = "anonymizers_torexit.txt",
-           .table      = "anonymizers",
-           .url        = "https://iplists.firehol.org/files/tor_exits.ipset",
-           .www        = "https://iplists.firehol.org/?ipset=tor_exits",
-           .format     = "ipset",
-           .enabled    = true,
-           .local_path = blocklist_localpath,
-           .write      = blocklist_write},
+    [3] = {.id       = 4,
+           .name     = "TOR exit nodes",
+           .desc     = "A set of IP addresses that act as Tor exit nodes.",
+           .filename = "anonymizers_torexit.txt",
+           .table    = "anonymizers",
+           .url      = "https://iplists.firehol.org/files/tor_exits.ipset",
+           .www      = "https://iplists.firehol.org/?ipset=tor_exits",
+           .format   = "ipset",
+           .enabled  = true,
+           .path     = block_path,
+           .write    = block_write},
 
     /**
      * table = adware
@@ -77,8 +78,8 @@ static block ALL_BLOCKS[] = {
            .www      = "https://iplists.firehol.org/?ipset=yoyo_adservers",
            .format   = "ipset",
            .enabled  = true,
-           .local_path = blocklist_localpath,
-           .write      = blocklist_write},
+           .path     = block_path,
+           .write    = block_write},
 
     /**
      * Terminates the array. DO NOT REMOVE.

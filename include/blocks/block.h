@@ -12,12 +12,12 @@ struct block {
   const char *filename;
   const char *format;
   bool enabled;
-  char* (*local_path)(struct block*);
+  char* (*path)(struct block*);
   int (*write)(const char*, const char*);
 };
 
-char* blocklist_localpath(struct block*);
-int blocklist_write(const char*, const char*);
+char* block_path(struct block*);
+int block_write(const char*, const char*);
 
 #define BLOCKLIST_VERSION "v0.4.0"
 #define NULL_BLOCKLIST                                     \

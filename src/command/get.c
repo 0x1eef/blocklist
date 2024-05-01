@@ -1,4 +1,4 @@
-#include <blocklist/blocks.h>
+#include <blocks/blocks.h>
 #include <curl/curl.h>
 #include <errno.h>
 #include <sysexits.h>
@@ -15,7 +15,7 @@ get_command(void)
   while (block->name != NULL)
   {
     const char *url = block->url;
-    char *path      = block->local_path(block);
+    char *path      = block->path(block);
     if (path)
     {
       int err = block->write(path, url);

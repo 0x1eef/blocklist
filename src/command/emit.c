@@ -1,5 +1,5 @@
-#include <blocklist/alloc.h>
-#include <blocklist/blocks.h>
+#include <blocks/alloc.h>
+#include <blocks/blocks.h>
 #include <errno.h>
 #include <sysexits.h>
 #include <isinetaddr.h>
@@ -25,7 +25,7 @@ emit_command(void)
     write_table_head(stdout, *name);
     while (block->name != NULL)
     {
-      char *path = block->local_path(block);
+      char *path = block->path(block);
       if (path)
       {
         FILE *in = fopen(path, "r");

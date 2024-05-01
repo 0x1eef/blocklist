@@ -1,12 +1,12 @@
-#include <blocklist/alloc.h>
-#include <blocklist/block.h>
+#include <blocks/alloc.h>
+#include <blocks/block.h>
 #include <errno.h>
 #include <string.h>
 #include <curl/curl.h>
 #include <sysexits.h>
 
 char *
-blocklist_localpath(block *self)
+block_path(block *self)
 {
   char *home           = getenv("HOME");
   const char *filename = self->filename;
@@ -28,7 +28,7 @@ blocklist_localpath(block *self)
 }
 
 int
-blocklist_write(const char *path, const char *url)
+block_write(const char *path, const char *url)
 {
   FILE *file;
   file = fopen(path, "w");

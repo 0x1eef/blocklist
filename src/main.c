@@ -1,5 +1,5 @@
-#include <blocklist/command.h>
-#include <blocklist/block.h>
+#include <blocks/command.h>
+#include <blocks/block.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -64,9 +64,9 @@ static void
 print_usage(void)
 {
   fprintf(stderr,
-          "Usage: blocklist COMMAND [OPTIONS]\n"
+          "Usage: blocks COMMAND [OPTIONS]\n"
           "\n"
           "Commands:\n"
-          "get  \tDownload blocklists into ~/.local/share/blocklist\n"
+          "get  \tDownload blocklists into ~/.local/share/blocks\n"
           "emit \tEmit pf.conf(5) tables to standard output\n");
 }
