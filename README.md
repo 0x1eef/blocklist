@@ -34,13 +34,13 @@ The available blocklists can be found in
 ## Tables
 
 * __&lt;attacks&gt;__ <br>
-  A table of IP addresses reported to be associated with attacks (eg brute force attacks).
+  A table of IP addresses reported to be associated with attacks (eg brute force attacks)
 * __&lt;malware&gt;__ <br>
-  A table of IP addresses reported to be associated with malware.
+  A table of IP addresses reported to be associated with malware
 * __&lt;anonymizers&gt;__ <br>
-  A table of IP addresses reported to be associated with anonymity (eg Tor).
+  A table of IP addresses reported to be associated with anonymity (eg Tor)
 * __&lt;adware&gt;__ <br>
-  A table of IP addreses reported to be associated with adware.
+  A table of IP addreses reported to be associated with adware
 
 ## Install
 
@@ -54,10 +54,10 @@ The available blocklists can be found in
 ## See also
 
 * [libcurl](https://curl.se/libcurl/)
-  is a required runtime dependency.
+  is a required runtime dependency
 * [blocks + cron](https://github.com/0x1eef/blocks.cron#readme)
   configures blocks to run at regular intervals via
-  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
+  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8))
 
 ## Sources
 
