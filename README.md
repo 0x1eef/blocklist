@@ -61,9 +61,9 @@ The available blocklists can be found in
 
 ## Sources
 
-* [GitHub](https://github.com/0x1eef/blocklist#readme)
-* [GitLab](https://gitlab.com/0x1eef/blocklist#about)
-* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocklist#about)
+* [GitHub](https://github.com/0x1eef/blocks#readme)
+* [GitLab](https://gitlab.com/0x1eef/blocks#about)
+* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocks#about)
 
 ## License
 
