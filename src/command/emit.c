@@ -5,7 +5,7 @@
 #include <isinetaddr.h>
 #include <string.h>
 
-static const int MAXLEN = 128;
+static const int LINELEN = 128;
 static const char *tablenames[]
     = {"attacks", "malware", "anonymizers", "adware", NULL};
 static int write_table_head(FILE *, const char *);
@@ -62,10 +62,10 @@ write_table_head(FILE *out, const char *name)
 static int
 write_table_body(FILE *out, FILE *in)
 {
-  char buf[MAXLEN];
+  char buf[LINELEN];
   int err = 0;
   errno   = 0;
-  while (fgets(buf, MAXLEN, in))
+  while (fgets(buf, LINELEN, in))
   {
     buf[strcspn(buf, "\n")] = '\0';
     if (iscidraddr4(buf))
