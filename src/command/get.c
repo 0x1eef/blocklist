@@ -23,12 +23,12 @@ get_command(void)
       {
         if (err == -1)
         {
-          fprintf(stderr, "[x] %s (%s)\n", strerror(errno), path);
+          fprintf(stderr, "[x] %s: %s\n", path, strerror(errno));
           return (EX_IOERR);
         }
         else
         {
-          fprintf(stderr, "[x] network error (%s)\n", url);
+          fprintf(stderr, "[x] %s: network error\n", url);
           return (EX_UNAVAILABLE);
         }
       }
