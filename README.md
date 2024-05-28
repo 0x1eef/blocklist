@@ -1,6 +1,6 @@
 ## About
 
-blocks is a command line utility that can download common IPv4
+blocks is a command line utility that can download common IP
 blocklists, and from those blocklists emit
 [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
 tables that can be used when crafting firewall rules in `/etc/pf.conf`.
