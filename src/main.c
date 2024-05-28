@@ -67,6 +67,6 @@ print_usage(void)
           "Usage: blocks COMMAND [OPTIONS]\n"
           "\n"
           "Commands:\n"
-          "  get  \tDownload blocklists into ~/.local/share/blocks\n"
+          "  get  \tGet blocklists (dir: ~/.local/share/blocks)\n"
           "  emit \tEmit pf.conf(5) tables to standard output\n");
 }
