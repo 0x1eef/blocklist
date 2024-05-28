@@ -25,13 +25,13 @@ install: build
 	@if [ -e "$(BIN_FILE)" ]; then \
 		set -x; \
 		install -s $(BIN_FILE) $(PREFIX)/bin/blocks; \
-		install man/man8/blocks.8 $(PREFIX)/man/man8/blocks.8; \
+		install man/man1/blocks.1 $(PREFIX)/man/man1/blocks.1; \
 	fi
 
 deinstall:
 	@set -x; \
 	rm $(PREFIX)/bin/blocks; \
-	rm $(PREFIX)/man/man8/blocks.8; \
+	rm $(PREFIX)/man/man8/blocks.1; \
 
 clean:
 	rm -rf $(BIN_DIR)
