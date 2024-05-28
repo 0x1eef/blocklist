@@ -25,7 +25,7 @@ static block ALL_BLOCKS[] = {
     [1]
     = {.id   = 2,
        .name = "FireHOL (web server)",
-       .desc = "A set of IP addresses a web server shouldn't communicate with",
+       .desc = "A set of IP addresses reported to pose a threat to web servers",
        .table    = "attacks",
        .filename = "attacks_fireholwebserver.txt",
        .url      = "https://iplists.firehol.org/files/firehol_webserver.netset",
@@ -41,7 +41,7 @@ static block ALL_BLOCKS[] = {
     [2] = {.id   = 3,
            .name = "FireHOL (web browser)",
            .desc
-           = "A set of IP addresses a web browser shouldn't communicate with",
+           = "A set of IP addresses reported to pose a threat to web browsers",
            .filename = "malware_fireholwebclient.txt",
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
