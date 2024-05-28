@@ -12,7 +12,7 @@ alloc(size_t size)
   mem = malloc(size);
   if (mem == NULL)
   {
-    fprintf(stderr, "[x] %s", strerror(errno));
+    fprintf(stderr, "error: malloc error\n");
     exit(EX_OSERR);
   }
   return (mem);

@@ -34,7 +34,7 @@ main(int argc, char *argv[])
     case -1:
       return (EX_USAGE);
     case 0:
-      printf("%s\n", BLOCKLIST_VERSION);
+      fprintf(stdout, "%s\n", BLOCKLIST_VERSION);
       return (EX_OK);
     }
   }

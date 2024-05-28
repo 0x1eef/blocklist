@@ -32,7 +32,7 @@ emit_command(void)
         write_table_comment(stdout, block);
         if (in == NULL || write_table_body(stdout, in))
         {
-          fprintf(stderr, "[x] %s: IO error\n", path);
+          fprintf(stderr, "error: read error\n");
           return (EX_IOERR);
         }
         free(path);
@@ -40,7 +40,7 @@ emit_command(void)
       }
       else
       {
-        fprintf(stderr, "[x] '%s' unable to determine path\n", block->name);
+        fprintf(stderr, "error: unable to determine path\n");
         return (EX_IOERR);
       }
     }

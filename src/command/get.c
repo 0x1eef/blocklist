@@ -23,25 +23,25 @@ get_command(void)
       {
         if (err == -1)
         {
-          fprintf(stderr, "[x] %s: %s\n", path, strerror(errno));
+          fprintf(stderr, "error: write error\n");
           return (EX_IOERR);
         }
         else
         {
-          fprintf(stderr, "[x] %s: network error\n", url);
+          fprintf(stderr, "error: network error\n");
           return (EX_UNAVAILABLE);
         }
       }
       else
       {
-        fprintf(stdout, "[-] GET\t%s\n", path);
+        fprintf(stdout, "ok: %s\n", block->filename);
       }
       block++;
       free(path);
     }
     else
     {
-      fprintf(stdout, "[x] '%s' unable to determine path\n", block->name);
+      fprintf(stdout, "error: unable to determine path\n");
       return (EX_IOERR);
     }
   }
