@@ -2,7 +2,6 @@
 #include <blocks/block.h>
 #include <blocks/blocks.h>
 #include <string.h>
-#include <stdio.h>
 #include <sys/param.h>
 #include <curl/curl.h>
 
