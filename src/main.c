@@ -67,6 +67,6 @@ print_usage(void)
           "Usage: blocks COMMAND [OPTIONS]\n"
           "\n"
           "Commands:\n"
-          "  get  \tGet blocklists\n"
-          "  emit \tEmit pf.conf(5) tables\n");
+          "  get  \tDownloads blocklists\n"
+          "  emit \tEmits pf.conf(5) tables\n");
 }

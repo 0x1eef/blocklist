@@ -5,9 +5,8 @@
 .Nm blocks
 - emits pf.conf(5) tables from common blocklists
 .Sh SYNOPSIS
-blocks get
-.br
-blocks emit
+.Nm blocks get
+.Nm blocks emit
 .Sh DESCRIPTION
 .Nm blocks
 is a command line utility that can download common
@@ -17,16 +16,17 @@ rules in
 .Pa /etc/pf.conf .
 .Pp
 .Sh EXAMPLES
-.Pp
+
+
 .Nm blocks get
 .br
-Get blocklists
+.br
+Downloads blocklists
 .Pp
 .Nm blocks emit
 .br
-Emit
-pf.conf(5)
-tables to standard output
+Emits
+pf.conf(5) tables
 .Pp
 .Sh AUTHORS
 The
