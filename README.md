@@ -15,7 +15,7 @@ The available blocklists can be found in
         $ mkdir -p ~/.local/share/blocks/
         $ mkdir -p /usr/local/share/pf/
 
-        # Download blocklists into ~/.local/share/blocks/
+        # Get blocklists (dir: ~/.local/share/blocks/)
         $ blocks get
 
         # Emit pf.conf(5) tables
@@ -44,12 +44,12 @@ The available blocklists can be found in
 
 ## Install
 
-    # Clone repository
+    # Clone
     $ git clone https://github.com/0x1eef/blocks
     $ cd blocks
 
     # Install
-    $ doas -u root -- make install
+    $ doas -u root make install
 
 ## See also
 
@@ -63,10 +63,10 @@ The available blocklists can be found in
 
 * [GitHub](https://github.com/0x1eef/blocks#readme)
 * [GitLab](https://gitlab.com/0x1eef/blocks#about)
-* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocks#about)
+* [git.HardenedBSD.org](https://git.HardenedBSD.org/0x1eef/blocks#about)
 
 ## License
 
-[BSD Zero Clause](https://choosealicense.com/licenses/0bsd/).
+[BSD Zero Clause](https://choosealicense.com/licenses/0bsd/)
 <br>
-See [LICENSE](./LICENSE).
+See [LICENSE](./LICENSE)
