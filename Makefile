@@ -31,7 +31,7 @@ install: build
 deinstall:
 	@set -x; \
 	rm $(PREFIX)/bin/blocks; \
-	rm $(PREFIX)/man/man8/blocks.1; \
+	rm $(PREFIX)/man/man1/blocks.1; \
 
 clean:
 	rm -rf $(BIN_DIR)
