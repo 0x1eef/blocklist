@@ -23,13 +23,24 @@ The available blocklists can be found in
 
 * **`/etc/pf.conf`**
 
+        ##
+        # Tables
         include "/usr/local/share/pf/blocklist"
         blocklist = "{ <attacks>, <malware>, <anonymizers>, <adware> }"
 
+        ##
+        # Defaults
         set skip on lo0
         block all
+
+        ##
+        # Allow outbound traffic but block traffic destined for $blocklist
         pass out on ue0
         block out on ue0 from any to $blocklist
+
+        ##
+        # Add exceptions (eg: cancel a false positive)
+        pass out on ue0 from any to www.example.com
 
 ## Tables
 
