@@ -11,9 +11,9 @@ static block ALL_BLOCKS[] = {
      * table = attacks
      **/
     [0] = {.id       = 1,
-           .name     = "firehol [level 1]",
+           .name     = "Firehol (level 1)",
            .desc     = "A set of IP addresses all internet facing servers, "
-                       "routers and firewalls shouldn't communicate with.",
+                       "routers and firewalls shouldn't communicate with",
            .table    = "attacks",
            .filename = "attacks_firehol1.txt",
            .url     = "https://iplists.firehol.org/files/firehol_level1.netset",
@@ -24,8 +24,8 @@ static block ALL_BLOCKS[] = {
            .write   = block_write},
     [1]
     = {.id   = 2,
-       .name = "firehol [web server]",
-       .desc = "A set of IP addresses a web server shouldn't communicate with.",
+       .name = "Firehol (web server)",
+       .desc = "A set of IP addresses a web server shouldn't communicate with",
        .table    = "attacks",
        .filename = "attacks_fireholwebserver.txt",
        .url      = "https://iplists.firehol.org/files/firehol_webserver.netset",
@@ -39,9 +39,9 @@ static block ALL_BLOCKS[] = {
      * table = malware
      **/
     [2] = {.id   = 3,
-           .name = "firehol [web browser]",
+           .name = "Firehol (web browser)",
            .desc
-           = "A set of IP addresses a web browser shouldn't communicate with.",
+           = "A set of IP addresses a web browser shouldn't communicate with",
            .filename = "malware_fireholwebclient.txt",
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
@@ -56,7 +56,7 @@ static block ALL_BLOCKS[] = {
      **/
     [3] = {.id       = 4,
            .name     = "TOR exit nodes",
-           .desc     = "A set of IP addresses that act as Tor exit nodes.",
+           .desc     = "A set of IP addresses that act as Tor exit nodes",
            .filename = "anonymizers_torexit.txt",
            .table    = "anonymizers",
            .url      = "https://iplists.firehol.org/files/tor_exits.ipset",
@@ -70,8 +70,8 @@ static block ALL_BLOCKS[] = {
      * table = adware
      **/
     [4] = {.id       = 5,
-           .name     = "adservers",
-           .desc     = "A set of IP addresses associated with adware.",
+           .name     = "Ad Servers",
+           .desc     = "A set of IP addresses associated with adware",
            .filename = "adware_yoyoadservers.txt",
            .table    = "adware",
            .url      = "https://iplists.firehol.org/files/yoyo_adservers.ipset",
