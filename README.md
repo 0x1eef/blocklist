@@ -56,13 +56,13 @@ The available blocklists can be found in
 ## Install
 
     # Clone
-    $ git clone https://github.com/0x1eef/blocks
-    $ cd blocks
+    user@localhost$ git clone https://github.com/0x1eef/blocks
+    user@localhost$ cd blocks
 
     # Install
-    $ doas -u root make install
+    root@localhost# make install
 
-## See also
+## Related
 
 * [libcurl](https://curl.se/libcurl/)
   is a required runtime dependency
